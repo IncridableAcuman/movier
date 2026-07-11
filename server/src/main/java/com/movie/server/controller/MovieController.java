@@ -1,12 +1,18 @@
 package com.movie.server.controller;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.movie.server.dto.MovieDetails;
 import com.movie.server.dto.MovieResponse;
 import com.movie.server.dto.VideoResponse;
 import com.movie.server.service.MovieService;
+
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -23,7 +29,7 @@ public class MovieController {
         return ResponseEntity.ok(movieService.getMovieDetails(id));
     }
     @GetMapping("/search/movie")
-    public ResponseEntity<MovieResponse> searchMovie(@RequestParam String query){
+    public ResponseEntity<MovieResponse> searchMovie(@RequestParam("query") String query){
         return ResponseEntity.ok(movieService.searchMovie(query));
     }
     @GetMapping("/movie/{id}/videos")
