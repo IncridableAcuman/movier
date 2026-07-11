@@ -7,14 +7,25 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-public class Results {
+public class MovieDetails {
+
     @JsonProperty("backdrop_path")
     private String backdropPath;
 
+    @JsonProperty("belongs_to_collection")
+    private BelongsToCollection collection;
+
+    @JsonProperty("genres")
+    private List<Genres> genres;
+
+    private String homepage;
     private Long id;
 
-    @JsonProperty("genre_ids")
-    private List<Integer> genreIds;
+    @JsonProperty("imdb_id")
+    private String imdbId;
+
+    @JsonProperty("origin_country")
+    private List<String> originCountry;
 
     @JsonProperty("original_language")
     private String originalLanguage;
@@ -29,9 +40,24 @@ public class Results {
 
     private double popularity;
 
+    @JsonProperty("production_companies")
+    private List<ProductionCompanies> companies;
+
+    @JsonProperty("production_countries")
+    private List<ProductionCountries> countries;
+
     @JsonProperty("release_date")
     private Date releaseDate;
 
+    @JsonProperty("spoken_languages")
+    private List<SpokenLanguages> languages;
+
+    private String status;
+
+    @JsonProperty("tagline")
+    private String tagline;
+
+    @JsonProperty("title")
     private String title;
 
     @JsonProperty("vote_average")

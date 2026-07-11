@@ -1,13 +1,11 @@
 package com.movie.server.controller;
 
+import com.movie.server.dto.MovieDetails;
 import com.movie.server.dto.MovieResponse;
 import com.movie.server.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/movie")
@@ -18,5 +16,9 @@ public class MovieController {
     @GetMapping
     public ResponseEntity<MovieResponse> getMovies(@RequestParam String category){
         return ResponseEntity.ok(movieService.getMovies(category));
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<MovieDetails> getMovieDetails(@PathVariable Long id){
+        return ResponseEntity.ok(movieService.getMovieDetails(id));
     }
 }
