@@ -1,3 +1,7 @@
 spring:
   application:
     name: server
+
+movie:
+  api_key: ${MOVIE_KEY}
+  api_url: ${MOVIE_URL}
