@@ -1,5 +1,6 @@
 package com.movie.server.service;
 
+import com.movie.server.exception.CustomInternalServerError;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -22,21 +23,37 @@ public class MovieService {
 
     // get movies by now_playing,popular,top_rated,upcoming categories
     public MovieResponse getMovies(String category){
-        String url = apiUrl+"/movie/"+category+"?language=en-US&page=1&api_key="+apiKey;
-        return restTemplate.getForObject(url,MovieResponse.class);
+        try {
+            String url = apiUrl+"/movie/"+category+"?language=en-US&page=1&api_key="+apiKey;
+            return restTemplate.getForObject(url,MovieResponse.class);
+        } catch (RuntimeException e) {
+            throw new CustomInternalServerError(e.getMessage());
+        }
     }
     // get a movie details by id
     public MovieDetails getMovieDetails(Long id){
-        String url = apiUrl+"/movie/"+id+"?language=en-US&page=1&api_key="+apiKey;
-        return restTemplate.getForObject(url,MovieDetails.class);
+        try {
+            String url = apiUrl+"/movie/"+id+"?language=en-US&page=1&api_key="+apiKey;
+            return restTemplate.getForObject(url,MovieDetails.class);
+        } catch (RuntimeException e) {
+            throw new CustomInternalServerError(e.getMessage());
+        }
     }
     public MovieResponse searchMovie(String query){
-        String url = apiUrl + "/search/movie?include_adult=false&language=en-US&page=1&query=" + query + "&api_key=" + apiKey;
-        return restTemplate.getForObject(url, MovieResponse.class);
+        try {
+            String url = apiUrl + "/search/movie?include_adult=false&language=en-US&page=1&query=" + query + "&api_key=" + apiKey;
+            return restTemplate.getForObject(url, MovieResponse.class);
+        } catch (RuntimeException e) {
+            throw new CustomInternalServerError(e.getMessage());
+        }
     }
     // get movie video with movie id
     public VideoResponse getVideos(Long id){
-        String url=apiUrl+"/movie/"+id+"/videos"+"?include_adult=false&language=en-US&page=1&api_key="+apiKey;
-        return restTemplate.getForObject(url,VideoResponse.class);
+        try {
+            String url=apiUrl+"/movie/"+id+"/videos"+"?include_adult=false&language=en-US&page=1&api_key="+apiKey;
+            return restTemplate.getForObject(url,VideoResponse.class);
+        } catch (RuntimeException e) {
+            throw new CustomInternalServerError(e.getMessage()  );
+        }
     }
 }
