@@ -2,7 +2,7 @@ import axios from 'axios';
 import type { Movie, MovieDetails, Video } from '../types';
 
 const API = axios.create({
-  baseURL: 'http://localhost:8080/api/v1', // Spring Boot portingiz
+  baseURL: 'https://movier-backend.onrender.com/api/v1', // Spring Boot portingiz
 });
 
 export const movieService = {
